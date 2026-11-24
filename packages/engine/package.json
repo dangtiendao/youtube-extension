@@ -1,0 +1,21 @@
+{
+  "name": "@tubevault/engine",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "dev": "tsx src/index.ts --server --dev",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start": "node dist/engine.cjs --server"
+  },
+  "dependencies": {
+    "@tubevault/shared": "*",
+    "ws": "^8.18.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "@types/ws": "^8.18.0"
+  }
+}

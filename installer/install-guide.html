@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hướng dẫn kích hoạt Chrome Extension — TubeVault</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 32px 18px;
+        background: #0b0f19;
+        color: #f1f5f9;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+      }
+      .wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        background: #121826;
+        border: 1px solid #253047;
+        border-radius: 14px;
+        padding: 28px;
+      }
+      h1 {
+        margin: 0 0 8px 0;
+        font-size: 22px;
+      }
+      p.lead {
+        color: #94a3b8;
+        margin: 0 0 22px 0;
+      }
+      .step {
+        background: #0b0f19;
+        border: 1px solid #253047;
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin-bottom: 12px;
+      }
+      .step-num {
+        display: inline-block;
+        background: #e11d48;
+        color: #fff;
+        font-weight: 700;
+        font-size: 12px;
+        padding: 2px 9px;
+        border-radius: 99px;
+        margin-bottom: 6px;
+      }
+      .copy-row {
+        display: flex;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      code,
+      input.path-box {
+        flex: 1;
+        background: #192234;
+        color: #f8fafc;
+        border: 1px solid #334155;
+        border-radius: 7px;
+        padding: 8px 10px;
+        font-family: Consolas, monospace;
+        font-size: 13px;
+      }
+      button,
+      a.btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #e11d48;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-weight: 600;
+        font-size: 13px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      a.btn.secondary {
+        background: #192234;
+        border: 1px solid #334155;
+      }
+      .footer {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Cài đặt TubeVault thành công!</h1>
+      <p class="lead">
+        Local Engine & Chrome Native Messaging đã được tự động cấu hình. Làm thêm 3 bước dưới đây (mất 20 giây) để
+        kích hoạt tiện ích trên Google Chrome:
+      </p>
+
+      <div class="step">
+        <div class="step-num">Bước 1</div>
+        <div>Mở trình duyệt <strong>Google Chrome</strong> và dán đường dẫn này vào thanh địa chỉ:</div>
+        <div class="copy-row">
+          <input class="path-box" id="chrome-url" value="chrome://extensions" readonly />
+          <button onclick="copyField('chrome-url', this)">Sao chép</button>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">Bước 2</div>
+        <div>
+          Bật công tắc <strong>Developer mode (Chế độ dành cho nhà phát triển)</strong> ở góc trên bên phải trang
+          Extensions.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">Bước 3</div>
+        <div>
+          Bấm nút <strong>Load unpacked (Tải tiện ích đã giải nén)</strong> ở góc trên bên trái, rồi dán đường dẫn thư
+          mục sau và bấm <strong>Select Folder</strong>:
+        </div>
+        <div class="copy-row">
+          <input class="path-box" id="ext-path" value="__EXTENSION_DIR__" readonly />
+          <button onclick="copyField('ext-path', this)">Sao chép đường dẫn</button>
+        </div>
+      </div>
+
+      <div class="footer">
+        <a class="btn" href="http://127.0.0.1:17890/" target="_blank">Hoặc mở ngay Web UI dự phòng (không cần Extension)</a>
+        <span style="color: #94a3b8; font-size: 12px">Extension ID cố định: <code>__EXTENSION_ID__</code></span>
+      </div>
+    </div>
+
+    <script>
+      function copyField(id, btn) {
+        const el = document.getElementById(id);
+        el.select();
+        navigator.clipboard.writeText(el.value).then(() => {
+          const old = btn.textContent;
+          btn.textContent = 'Đã sao chép!';
+          setTimeout(() => (btn.textContent = old), 1500);
+        });
+      }
+    </script>
+  </body>
+</html>

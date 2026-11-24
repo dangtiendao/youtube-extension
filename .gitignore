@@ -1,0 +1,13 @@
+node_modules/
+dist/
+dist-ext/
+dist-web/
+release/
+*.log
+*.db
+*.db-shm
+*.db-wal
+.secrets/
+installer/output/
+installer/staging/
+packages/extension/public/manifest.json

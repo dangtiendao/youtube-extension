@@ -1,0 +1,28 @@
+{
+  "name": "tubevault-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TubeVault - YouTube Video, Album/Playlist & Channel Downloader (Chrome Extension + Local Node.js Engine + Windows Installer)",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "gen:key": "node scripts/generate-ext-key.mjs",
+    "dev:engine": "npm --workspace=@tubevault/engine run dev",
+    "dev:ext": "npm --workspace=@tubevault/extension run dev",
+    "build:shared": "npm --workspace=@tubevault/shared run build",
+    "build:engine": "npm run build:shared && npm --workspace=@tubevault/engine run build && node scripts/build-engine.mjs",
+    "build:ext": "npm run build:shared && npm run gen:key && npm --workspace=@tubevault/extension run build",
+    "build:launcher": "powershell -ExecutionPolicy Bypass -File scripts/build-launcher.ps1",
+    "build:sea": "npm run build:engine && node scripts/build-engine.mjs --sea",
+    "build:all": "npm run build:shared && npm run gen:key && npm run build:engine && npm run build:ext && npm run build:launcher",
+    "build:installer": "npm run build:all && powershell -ExecutionPolicy Bypass -File scripts/package-installer.ps1",
+    "register:native": "npm run build:launcher && node packages/engine/dist/engine.cjs --register",
+    "typecheck": "npm --workspace=@tubevault/shared run typecheck && npm --workspace=@tubevault/engine run typecheck && npm --workspace=@tubevault/extension run typecheck"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}
